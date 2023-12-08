@@ -1,0 +1,141 @@
+/*Resetting margin and padding to zero, and setting a background color */
+* {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(21, 21, 75);
+    position: relative;
+}
+
+/* Style for h1 element */
+h1 {
+    margin: 3%;
+    color: white;
+    text-align: center;
+    font-size: 40px;
+}
+
+/* Style for canvas element */
+canvas {
+    /* Uncomment the line below if you want to set a background color for the canvas */
+    /* background-color: rgb(52, 44, 103); */
+    margin-left: 3%;
+    margin-top: 0;
+    width: 50%;
+    height: 28rem;
+    border: 2px red solid;
+    border-radius: 10px;
+}
+
+/* Styles for a container holding a canvas and time buttons */
+.canvas_time {
+    display: flex;
+    /* position: relative; */
+}
+
+/* Styles for time buttons container */
+.time_btns {
+    position: absolute;
+    bottom: 0;
+    left: 15%;
+    background-color: transparent;
+}
+
+/* Styles for buttons within the time buttons container */
+.time_btns button {
+    padding: 5px;
+    color: white;
+    margin: 1rem;
+    height: 25px;
+    border-radius: 25px;
+    border-color: none; 
+    outline: none;
+    border: none; 
+    cursor: pointer; 
+    background-color: rgb(27, 27, 106);
+}
+
+/* Change background color on hover for buttons within the time buttons container */
+.time_btns button:hover {
+    background-color: rgb(34, 34, 168);
+}
+
+aside{
+    border: 2px red solid;
+    width: 13%;
+    height: 28rem;
+    padding: 20px;
+    background-color: rgb(27, 27, 106);
+    right: 8%;
+    top: 20%;
+    border-radius: 5px;
+    padding: 2%;
+    position: fixed;
+}
+.stocks_list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    
+}
+
+.list_i {
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* Align items vertically in the center */
+    margin-bottom: 10px; /* Adjust the margin to your preference */
+    background-color: transparent;
+}
+
+.aside_btn {
+    color: white;
+    margin: 1%;
+    width: 50px;
+    height: 25px;
+    background-color: rgb(17, 30, 92);
+    border-radius: 5px;
+    margin-right: 5px; /* Adjust the margin to create space between button and span */
+}
+
+.span_style{
+    background-color: transparent;
+    margin: 5%;
+    font-size: 20px;
+}
+
+.summary{
+    margin: 1%;
+    margin-left: 3%;
+    border: 2px red solid;
+    width: 50%;
+    height: auto;
+}
+
+.summary_heading{
+    color: white;
+    margin: 1.5%;
+    margin-bottom: -.5%;
+    display: inline-block
+}
+
+p{
+    color: white;
+    font-size: 12px;
+    padding: 1%;
+}
+.profit_in_summary{
+    color:rgb(12, 86, 12);
+    font-weight: 800;
+    font-size: 25px;
+    padding: 1px;
+    margin: 5px;
+    background-color: transparent;
+}
+
+.bookValue_in_summary{
+    color:white;
+    font-size: 25px;
+    padding: 1px;
+    margin: 5px;
+    background-color: transparent;
+}
