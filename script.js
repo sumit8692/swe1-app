@@ -50,12 +50,17 @@ function createChart(dates, values){
       },
       options: { 
         scales: {
-          x: { ticks:{
-            display: false
-          }},
-          y: [{
-            display: false
-          }],
+          x: { ticks:
+                {
+                display: false
+                }
+          },
+          y: {
+            ticks: 
+                {
+                  display: false
+                }
+          },
         },
         layout: {
           padding: {
