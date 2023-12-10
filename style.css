@@ -14,17 +14,6 @@ h1 {
     font-size: 40px;
 }
 
-/* Style for canvas element */
-canvas {
-    /* Uncomment the line below if you want to set a background color for the canvas */
-    /* background-color: rgb(52, 44, 103); */
-    margin-left: 3%;
-    margin-top: 0;
-    width: 50%;
-    height: 28rem;
-    border: 2px red solid;
-    border-radius: 10px;
-}
 
 /* Styles for a container holding a canvas and time buttons */
 .canvas_time {
@@ -34,15 +23,20 @@ canvas {
 }
 
 .canvas_wrapper{
-    height: 50%;
-    width: 55%;
+    height: 60%;
+    width: 68%;
+    display: flexbox;
+    margin-left: 2%;
+    margin-top: 0;
+    border: 2px red solid;
+    border-radius: 10px;
 }
 /* Styles for time buttons container */
 .time_btns {
     display: flexbox;
     position: absolute;
     bottom: 0;
-    left: 15%;
+    left: 25%;
     background-color: transparent;
     justify-content: center;
     text-align: center;
@@ -80,6 +74,9 @@ aside{
     padding: 2%;
     position: fixed;
 }
+#stockChart{
+    display: flexbox;
+}
 .stocks_list{
     display: flex;
     flex-wrap: wrap;
@@ -116,7 +113,7 @@ aside{
     margin: 1%;
     margin-left: 3%;
     border: 2px red solid;
-    width: 50%;
+    width: 67%;
     height: auto;
 }
 

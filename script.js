@@ -44,18 +44,31 @@ function createChart(dates, values){
       data: {
         labels: dates,
         datasets: [{
+          borderColor: '#54ff73',
           data: values,
           borderWidth: 1
         }]
       },
       options: { 
+        elements: {
+          point:{
+              radius: 0
+          }
+      },
         scales: {
-          x: { ticks:
+          x: { 
+            grid:{
+              display: false
+            },
+            ticks:
                 {
                 display: false
                 }
           },
           y: {
+            grid: {
+              display: false
+            },
             ticks: 
                 {
                   display: false
@@ -82,8 +95,11 @@ function createChart(dates, values){
           customCanvasBackgroundColor: {
             color: 'blue',
           },
+          legend: {
+            display: false
+          }
         },
-      }
+      },
     });
 }
 
