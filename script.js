@@ -3,6 +3,85 @@ function roundToDecimalPlaces(number, decimalPlaces) {
   return Math.round(number * factor) / factor;
 }
 
+  let chart;
+      //To filter out stockdata when company is given
+  function filterStockData(data, companyName, timePeriod='5y') {
+
+        if (!data.stocksData[0][companyName]) {
+            throw new Error(`Company '${companyName}' not found in the stock data.`);
+        }
+    
+        if (!data.stocksData[0][companyName][timePeriod]) {
+            throw new Error(`Time period '${timePeriod}' not found for '${companyName}'.`);
+        }
+        myChart = true;
+        const timestamps = data.stocksData[0][companyName][timePeriod].timeStamp;
+        const values = data.stocksData[0][companyName][timePeriod].value;
+        const dates = timestamps.map(timestamp => {
+              const date = new Date(timestamp * 1000); // Assuming timestamps are in seconds
+          
+              const day = String(date.getDate()).padStart(2, '0');
+              const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+              const year = date.getFullYear();
+
+              return `${day}/${month}/${year}`;
+          }); // Assuming timestamps are in seconds
+
+        return { dates, values };
+    
+    }
+    
+
+function createChart(dates, values){
+
+    if(chart){
+      chart.destroy();
+    }
+    
+  const ctx = document.getElementById('stockChart');
+    chart = chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: dates,
+        datasets: [{
+          data: values,
+          borderWidth: 1
+        }]
+      },
+      options: { 
+        scales: {
+          x: { ticks:{
+            display: false
+          }},
+          y: [{
+            display: false
+          }],
+        },
+        layout: {
+          padding: {
+            bottom: 50,
+          },
+        },
+        maintainAspectRatio: true,
+        responsiveness: true,
+        legend: {
+          display: false,
+          position: 'bottom',
+          usePointStyle: true,
+          labels: {
+            fontColor: "grey",
+            usePointStyle: true,
+          },
+        },
+        plugins: {
+          customCanvasBackgroundColor: {
+            color: 'blue',
+          },
+        },
+      }
+    });
+}
+
 function getBookValueAndProfit(stockSymbol, stocksStatsData) {
   const statsData = stocksStatsData.stocksStatsData[0];
   
@@ -85,7 +164,7 @@ document.addEventListener('DOMContentLoaded', async function () {
           // Change cursor to pointer on hover
           button.style.cursor = 'pointer';
         });
-    
+        
         button.addEventListener("click", function () {
 
           console.log(`Button for ${stockSymbol} clicked`);
@@ -106,6 +185,9 @@ document.addEventListener('DOMContentLoaded', async function () {
           const SummDiv = document.querySelector('.summary');
           const paraInSumm = SummDiv.querySelector('p');
           paraInSumm.textContent = summ; 
+
+          const {dates, values} = filterStockData(stocksdata,button.value);
+          createChart(dates, values);
           
         });
 
@@ -158,6 +240,14 @@ document.addEventListener('DOMContentLoaded', async function () {
       profit_in_summary.textContent = `${profit}%`;
       bookValue_in_summary.textContent = `$${bookValue}`;
 
+
+      //checking whether filterStockData function is working or not
+      const { dates, values } = filterStockData(stocksdata, firstStockSymbol, '5y');
+
+      createChart(dates, values);
+
+      
+      
 
     }   
 });
