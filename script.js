@@ -1,9 +1,9 @@
-  import roundToDecimalPlaces from './math.js'
-  import filterStockData from './filter_stock_data.js';
-  import fetchData from './fetchdata.js';
-  import getBookValueAndProfit from './Bookvalue_and_profit.js'
-  import getSummaryFromStockProfileData from './filter_summary.js';
-  import  createChartHandler  from './chartHandler.js';
+  import roundToDecimalPlaces from './src/math.js'
+  import filterStockData from './src/filter_stock_data.js';
+  import fetchData from './src/fetchdata.js';
+  import getBookValueAndProfit from './src/Bookvalue_and_profit.js'
+  import getSummaryFromStockProfileData from './src/filter_summary.js';
+  import  createChartHandler  from './src/chartHandler.js';
   const chartHandler = createChartHandler();
 
   let flag_for_company;
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 
   const stockStatsData = await fetchData("https://stocks3.onrender.com/api/stocks/getstockstatsdata");
-  const stockSummaryData = await fetchData('https://stocks3.onrender.com/api/stocks/getstocksprofiledata');
+  const stockSummaryData = await fetchData("https://stocks3.onrender.com/api/stocks/getstocksprofiledata");
   const stocksData = await fetchData("https://stocks3.onrender.com/api/stocks/getstocksdata")
   
   console.log(stockStatsData);
@@ -31,6 +31,7 @@ buttons.forEach(function (button) {
     // Add a click event listener to each button
     button.addEventListener('click', function () {
         // Get the value attribute of the clicked button (1mo, 3mo, 1y, 5y)
+       
         let timePeriod = this.value;
         
         // Call the function to update chart data based on the selected time period
@@ -69,6 +70,7 @@ buttons.forEach(function (button) {
         });
         
         button.addEventListener("click", function () {
+          
           flag_for_company = stockSymbol;
           console.log(`Button for ${stockSymbol} clicked`);
           const h2inSummDiv = document.querySelector('.summary_heading');
