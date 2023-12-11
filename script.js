@@ -1,105 +1,12 @@
   import roundToDecimalPlaces from './math.js'
   import filterStockData from './filter_stock_data.js';
   import fetchData from './fetchdata.js';
-  
+  import getBookValueAndProfit from './Bookvalue_and_profit.js'
+  import getSummaryFromStockProfileData from './filter_summary.js';
+  import  createChartHandler  from './chartHandler.js';
+  const chartHandler = createChartHandler();
+
   let flag_for_company;
-
-  let chart;
-      //To filter out stockdata when company is given
-    
-
-function createChart(dates, values){
-
-    if(chart){
-      chart.destroy();
-    }
-    
-  const ctx = document.getElementById('stockChart');
-    chart = chart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: dates,
-        datasets: [{
-          borderColor: '#54ff73',
-          data: values,
-          borderWidth: 1
-        }]
-      },
-      options: { 
-        elements: {
-          point:{
-              radius: 0
-          }
-      },
-      
-      scales: {
-        x: { 
-          grid:{
-            display: false,
-          },
-          ticks:
-            {
-              display: false
-            }
-          },
-          y: {
-            grid: { 
-              display: false,
-            },
-            ticks: 
-                {
-                  display: false
-                }
-          },
-        },
-        layout: {
-          padding: {
-            bottom: 50,
-          },
-        },
-        maintainAspectRatio: true,
-        responsiveness: true,
-        legend: {
-          display: false,
-          position: 'bottom',
-          usePointStyle: true,
-          labels: {
-            fontColor: "grey",
-            usePointStyle: true,
-          },
-        },
-        plugins: {
-          customCanvasBackgroundColor: {
-            color: 'blue',
-          },
-          legend: {
-            display: false
-          }
-        },
-      },
-    });
-}
-
-function getBookValueAndProfit(stockSymbol, stocksStatsData) {
-  const statsData = stocksStatsData.stocksStatsData[0];
-  
-  if (statsData.hasOwnProperty(stockSymbol)) {
-    const { profit, bookValue } = statsData[stockSymbol];
-    return { profit, bookValue};
-  } else {
-    return null; // Handle the case where the stock symbol is not found
-  }
-}
-
-function getSummaryFromStockProfileData(value, stockSummaryData){
-    const summ = stockSummaryData.stocksProfileData[0];
-
-    if (summ.hasOwnProperty(value)) {
-      const  summary = summ[value].summary;
-      return summary;
-    } 
-    return null;
-}
 
 document.addEventListener('DOMContentLoaded', async function () {
   console.log('DOM content has been fully loaded');
@@ -128,8 +35,8 @@ buttons.forEach(function (button) {
         
         // Call the function to update chart data based on the selected time period
         console.log(flag_for_company);
-        const {dates, values} = filterStockData(stocksdata, flag_for_company, timePeriod);
-        createChart(dates, values);
+        const {dates, values} = filterStockData(stocksData, flag_for_company, timePeriod);
+        chartHandler.createChart(dates, values);
     });
 });
 
@@ -182,8 +89,8 @@ buttons.forEach(function (button) {
           const paraInSumm = SummDiv.querySelector('p');
           paraInSumm.textContent = summ; 
 
-          const {dates, values} = filterStockData(stocksdata,button.value);
-          createChart(dates, values);
+          const {dates, values} = filterStockData(stocksData,button.value);
+          chartHandler.createChart(dates, values);
           
         });
 
@@ -208,7 +115,7 @@ buttons.forEach(function (button) {
       }
     });
 
-
+    
       const firstStockKey = Object.keys(stockSummaryData.stocksProfileData[0]);
       console.log(firstStockKey);
 
@@ -241,10 +148,7 @@ buttons.forEach(function (button) {
       //checking whether filterStockData function is working or not
       const { dates, values } = filterStockData(stocksData, firstStockSymbol, '5y');
 
-      createChart(dates, values);
-
-      
-      
+      chartHandler.createChart(dates, values);
 
     }   
 });
