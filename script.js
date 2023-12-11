@@ -16,7 +16,7 @@ function roundToDecimalPlaces(number, decimalPlaces) {
         if (!data.stocksData[0][companyName][timePeriod]) {
             throw new Error(`Time period '${timePeriod}' not found for '${companyName}'.`);
         }
-        myChart = true;
+        
         const timestamps = data.stocksData[0][companyName][timePeriod].timeStamp;
         const values = data.stocksData[0][companyName][timePeriod].value;
         const dates = timestamps.map(timestamp => {
