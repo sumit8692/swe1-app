@@ -1,5 +1,6 @@
   import roundToDecimalPlaces from './math.js'
   import filterStockData from './filter_stock_data.js';
+  import fetchData from './fetchdata.js';
   
   let flag_for_company;
 
@@ -103,37 +104,17 @@ function getSummaryFromStockProfileData(value, stockSummaryData){
 document.addEventListener('DOMContentLoaded', async function () {
   console.log('DOM content has been fully loaded');
 
-  let stockStatsData = {};
-  let stockSummaryData = {};
-  let stocksdata = {};
 
-  // Fetching the summary of any stock data from the API
-  const stocksStatsDataUrl = "https://stocks3.onrender.com/api/stocks/getstockstatsdata";
-  const stocksSummaryDataUrl = 'https://stocks3.onrender.com/api/stocks/getstocksprofiledata';
-  const stocksDataUrl = "https://stocks3.onrender.com/api/stocks/getstocksdata";
+  const stockStatsData = await fetchData("https://stocks3.onrender.com/api/stocks/getstockstatsdata");
+  const stockSummaryData = await fetchData('https://stocks3.onrender.com/api/stocks/getstocksprofiledata');
+  const stocksData = await fetchData("https://stocks3.onrender.com/api/stocks/getstocksdata")
+  
+  console.log(stockStatsData);
+  console.log(stockSummaryData);
+  console.log(stocksData);
 
-  try {
-    const response_stats = await fetch(stocksStatsDataUrl);
-    const response_summary = await fetch(stocksSummaryDataUrl);
-    const response_stocksDataUrl = await fetch(stocksDataUrl);
+  create_btns_stock_summ(stockStatsData);
 
-    if (!response_stats.ok || !response_summary.ok || !response_stocksDataUrl.ok) {
-      throw new Error(`HTTP error! Status: ${response_stats.status || response_summary.status || response_stocksDataUrl.status}`);
-    }
-
-    stockStatsData = await response_stats.json();
-    stockSummaryData = await response_summary.json();
-    stocksdata = await response_stocksDataUrl.json();
-
-    console.log(stockStatsData);
-    console.log(stockSummaryData);
-    console.log(stocksdata);
-
-    create_btns_stock_summ(stockStatsData);
-
-  } catch (error) {
-    console.error("Fetch error:", error);
-  }
 
  // Select all buttons inside elements with the class 'time_btns'
 const buttons = document.querySelectorAll('.time_btns button');
@@ -258,7 +239,7 @@ buttons.forEach(function (button) {
 
 
       //checking whether filterStockData function is working or not
-      const { dates, values } = filterStockData(stocksdata, firstStockSymbol, '5y');
+      const { dates, values } = filterStockData(stocksData, firstStockSymbol, '5y');
 
       createChart(dates, values);
 
