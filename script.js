@@ -1,37 +1,10 @@
-function roundToDecimalPlaces(number, decimalPlaces) {
-  const factor = Math.pow(10, decimalPlaces);
-  return Math.round(number * factor) / factor;
-}
-
+  import roundToDecimalPlaces from './math.js'
+  import filterStockData from './filter_stock_data.js';
+  
   let flag_for_company;
 
   let chart;
       //To filter out stockdata when company is given
-  function filterStockData(data, companyName, timePeriod='5y') {
-
-        if (!data.stocksData[0][companyName]) {
-            throw new Error(`Company '${companyName}' not found in the stock data.`);
-        }
-    
-        if (!data.stocksData[0][companyName][timePeriod]) {
-            throw new Error(`Time period '${timePeriod}' not found for '${companyName}'.`);
-        }
-        
-        const timestamps = data.stocksData[0][companyName][timePeriod].timeStamp;
-        const values = data.stocksData[0][companyName][timePeriod].value;
-        const dates = timestamps.map(timestamp => {
-              const date = new Date(timestamp * 1000); // Assuming timestamps are in seconds
-          
-              const day = String(date.getDate()).padStart(2, '0');
-              const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
-              const year = date.getFullYear();
-
-              return `${day}/${month}/${year}`;
-          }); // Assuming timestamps are in seconds
-        
-        return { dates, values };
-    
-    }
     
 
 function createChart(dates, values){
