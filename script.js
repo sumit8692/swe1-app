@@ -3,6 +3,8 @@ function roundToDecimalPlaces(number, decimalPlaces) {
   return Math.round(number * factor) / factor;
 }
 
+  let flag_for_company;
+
   let chart;
       //To filter out stockdata when company is given
   function filterStockData(data, companyName, timePeriod='5y') {
@@ -26,7 +28,7 @@ function roundToDecimalPlaces(number, decimalPlaces) {
 
               return `${day}/${month}/${year}`;
           }); // Assuming timestamps are in seconds
-
+        
         return { dates, values };
     
     }
@@ -55,19 +57,20 @@ function createChart(dates, values){
               radius: 0
           }
       },
-        scales: {
-          x: { 
-            grid:{
+      
+      scales: {
+        x: { 
+          grid:{
+            display: false,
+          },
+          ticks:
+            {
               display: false
-            },
-            ticks:
-                {
-                display: false
-                }
+            }
           },
           y: {
-            grid: {
-              display: false
+            grid: { 
+              display: false,
             },
             ticks: 
                 {
@@ -159,6 +162,23 @@ document.addEventListener('DOMContentLoaded', async function () {
     console.error("Fetch error:", error);
   }
 
+ // Select all buttons inside elements with the class 'time_btns'
+const buttons = document.querySelectorAll('.time_btns button');
+
+// Iterate over each button in the NodeList
+buttons.forEach(function (button) {
+    // Add a click event listener to each button
+    button.addEventListener('click', function () {
+        // Get the value attribute of the clicked button (1mo, 3mo, 1y, 5y)
+        let timePeriod = this.value;
+        
+        // Call the function to update chart data based on the selected time period
+        console.log(flag_for_company);
+        const {dates, values} = filterStockData(stocksdata, flag_for_company, timePeriod);
+        createChart(dates, values);
+    });
+});
+
   function create_btns_stock_summ(data) {
     const stockKeys = Object.keys(data.stocksStatsData[0]);
 
@@ -168,6 +188,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     // Create buttons for each key
     stockKeys.forEach(stockSymbol => {
       if (stockSymbol !== "_id") {
+        
         const bookValue = data.stocksStatsData[0][stockSymbol].bookValue;
         const profit = data.stocksStatsData[0][stockSymbol].profit;
 
@@ -187,7 +208,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         });
         
         button.addEventListener("click", function () {
-
+          flag_for_company = stockSymbol;
           console.log(`Button for ${stockSymbol} clicked`);
           const h2inSummDiv = document.querySelector('.summary_heading');
           h2inSummDiv.textContent = button.value; 
@@ -238,6 +259,7 @@ document.addEventListener('DOMContentLoaded', async function () {
       console.log(firstStockKey);
 
       const firstStockSymbol = firstStockKey[0];
+      flag_for_company = firstStockSymbol;
       console.log(firstStockSymbol);
 
       const firstStockSummary = stockSummaryData.stocksProfileData[0][firstStockKey[0]].summary;
