@@ -1,6 +1,0 @@
-#!/Users/sumitshah/Stock_market_Project/djangotutorial/myenv/bin/python3.12
-import sys
-from ebcli.core.ebpcore import main
-if __name__ == '__main__':
-    sys.argv[0] = sys.argv[0].removesuffix('.exe')
-    sys.exit(main())
