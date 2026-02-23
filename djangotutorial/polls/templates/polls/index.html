@@ -1,4 +1,8 @@
 <h1>Latest Polls</h1>
+<p>
+    For polls go to <a href="{% url 'polls:index' %}">{% url 'polls:index' %}</a>
+    and for admin go to <a href="/admin/">/admin/</a>.
+</p>
 
 {% if latest_question_list %}
     <ul>
