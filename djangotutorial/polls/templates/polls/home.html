@@ -1,0 +1,53 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'polls/style.css' %}">
+
+<div class="navigation-container">
+    <h1>Polls Application: Full Navigation Guide</h1>
+    
+    <section class="how-to-navigate">
+        <h2>App Structure & URLs</h2>
+        <p>This application is divided into three main areas:</p>
+        <ul>
+            <li><strong>The Landing Page (<code>/</code>)</strong>: This is where you are now. It serves as your "How-To" guide and a quick list of active polls.</li>
+            <li><strong>The Polls Index (<code>/polls/</code>)</strong>: The dedicated app view that lists all questions. You can navigate here directly to see the full list of polls.</li>
+            <li><strong>The Admin Dashboard (<code>/admin/</code>)</strong>: The secure area for managing content.</li>
+        </ul>
+    </section>
+
+    <section class="navigation-steps">
+        <h2>User Flow</h2>
+        <ol>
+            <li>Navigate to the <strong>Polls Index</strong> at <a href="/polls/">/polls/</a> or use the list below.</li>
+            <li>Click on a question to go to its <strong>Detail</strong> page (e.g., <code>/polls/1/</code>).</li>
+            <li>Select a choice and click <strong>Vote</strong>.</li>
+            <li>View the final standings on the <strong>Results</strong> page (e.g., <code>/polls/1/results/</code>).</li>
+        </ol>
+    </section>
+
+    <section class="admin-login">
+        <h2>Administrative Access</h2>
+        <p>To add or edit questions (like the "What is 1+1?" poll you created), use these credentials:</p>
+        <ul>
+            <li><strong>URL:</strong> <a href="/admin">/admin</a></li>
+            <li><strong>Username:</strong> <code>hello@sumit</code></li>
+            <li><strong>Password:</strong> <code>Pass12345!</code></li>
+        </ul>
+    </section>
+
+    <hr>
+
+    <h2>Active Polls List</h2>
+    {% if latest_question_list %}
+        <ul>
+        {% for question in latest_question_list %}
+            <li>
+                <a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a>
+                <span style="color: #666;">(ID: {{ question.id }})</span>
+            </li>
+        {% endfor %}
+        </ul>
+        <p><a href="/polls/">Click here to go to the full /polls/ index page &rarr;</a></p>
+    {% else %}
+        <p>No polls are currently in the database. Log in as <strong>hello@sumit</strong> to add one!</p>
+    {% endif %}
+</div>
