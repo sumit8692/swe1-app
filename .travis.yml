@@ -31,7 +31,7 @@ deploy:
   secret_access_key: $AWS_SECRET_KEY
   region: "us-east-1"
   app: "swe1-app"
-  env: "Swe1-app-env" # Ensure this matches your AWS console exactly
-  bucket_name: "your-s3-bucket-name" # Find this in your AWS S3 console
+  env: "django-clean-v3" # Ensure this matches your AWS console exactly
+  bucket_name: "elasticbeanstalk-us-west-2-563336977573 " # Find this in your AWS S3 console
   on:
     branch: main
