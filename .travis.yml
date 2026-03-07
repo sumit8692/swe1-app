@@ -21,9 +21,10 @@ script:
   - flake8 . --exclude=myenv/
   
   - coverage run --source='.' manage.py test
+  - pytest --cov=./
 
 after_success:
-  - coveralls
+  - COVERALLS_REPO_NAME=sumit8692/swe1-app coveralls
 
 deploy:
   provider: elasticbeanstalk
