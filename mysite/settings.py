@@ -11,8 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
-import socket   
-import os
+import socket
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,9 +29,9 @@ DEBUG = True
 # mysite/settings.py
 
 ALLOWED_HOSTS = [
-    'django-clean-v3.eba-p8buupdi.us-west-2.elasticbeanstalk.com',
-    'localhost',
-    '127.0.0.1',
+    "django-clean-v3.eba-p8buupdi.us-west-2.elasticbeanstalk.com",
+    "localhost",
+    "127.0.0.1",
 ]
 
 # Automatically add the EC2 internal IP to ALLOWED_HOSTS
