@@ -1,4 +1,4 @@
-[![Build Status]([https://travis-ci.com/sumit8692/swe1-app.svg?branch=main](https://app.travis-ci.com/sumit8692/swe1-app.svg?token=nPwy27puBtDidTi1M3S2&branch=main))]
+[![Build Status](https://app.travis-ci.com/sumit8692/swe1-app.svg?token=nPwy27puBtDidTi1M3S2&branch=main)](https://app.travis-ci.com/sumit8692/swe1-app)
 
 # swe1-app
 
