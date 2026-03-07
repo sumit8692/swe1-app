@@ -5,6 +5,7 @@ python:
 
 cache: pip
 
+service_name: travis-pro
 
 install:
   - pip install --upgrade pip
