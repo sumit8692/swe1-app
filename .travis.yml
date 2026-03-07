@@ -5,7 +5,7 @@ python:
 
 cache: pip
 
-service_name: travis-pro
+
 
 install:
   - pip install --upgrade pip
@@ -22,7 +22,7 @@ script:
   - coverage run --source='.' manage.py test
 
 after_success:
-  - COVERALLS_REPO_NAME=sumit8692/swe1-app coveralls
+   - coveralls
 
 deploy:
   provider: elasticbeanstalk
