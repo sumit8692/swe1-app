@@ -5,6 +5,7 @@ python:
 
 cache: pip
 
+service: travis-pro
 
 
 install:
