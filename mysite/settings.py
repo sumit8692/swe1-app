@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import socket   
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,12 +27,20 @@ SECRET_KEY = "django-insecure-&=_wr5$f!cnzb6r_19fpufg5@+k)(tpexwx_vf-c-4c(4^4#0$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# mysite/settings.py
+
 ALLOWED_HOSTS = [
-    "django-clean-v3.eba-p8buupdi.us-west-2.elasticbeanstalk.com",
-    "django-clean-env.eba-p8buupdi.us-west-2.elasticbeanstalk.com",
-    "localhost",
-    "127.0.0.1",
+    'django-clean-v3.eba-p8buupdi.us-west-2.elasticbeanstalk.com',
+    'localhost',
+    '127.0.0.1',
 ]
+
+# Automatically add the EC2 internal IP to ALLOWED_HOSTS
+try:
+    host_ip = socket.gethostbyname(socket.gethostname())
+    ALLOWED_HOSTS.append(host_ip)
+except Exception:
+    pass
 
 
 # Application definition
