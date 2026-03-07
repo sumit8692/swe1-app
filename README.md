@@ -1,4 +1,5 @@
-[![Build Status](https://app.travis-ci.com/sumit8692/swe1-app.svg?token=nPwy27puBtDidTi1M3S2&branch=main)](https://app.travis-ci.com/sumit8692/swe1-app) [[![Coverage Status](https://coveralls.io/repos/github/sumit8692/swe1-app/badge.svg?branch=main)](https://coveralls.io/github/sumit8692/swe1-app)](https://coveralls.io/repos/github/sumit8692/swe1-app/badge.svg?branch=main&kill_cache=1)
+[![Build Status](https://app.travis-ci.com/sumit8692/swe1-app.svg?token=nPwy27puBtDidTi1M3S2&branch=main)](https://app.travis-ci.com/sumit8692/swe1-app) 
+[![Coverage Status](https://coveralls.io/repos/github/SUMIT8692/swe1-app/badge.svg?branch=main&kill_cache=1)](https://coveralls.io/github/SUMIT8692/swe1-app?branch=main)
 
 
 # swe1-app
