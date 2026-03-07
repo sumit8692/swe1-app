@@ -3,8 +3,6 @@ language: python
 python:
   - "3.12"
 
-service_name: travis-pro
-
 cache: pip
 
 
