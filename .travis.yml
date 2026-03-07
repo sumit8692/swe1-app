@@ -1,0 +1,33 @@
+dist: focal
+language: python
+python:
+  - "3.10" # Or your specific version
+
+services:
+  - postgresql # Only include if your Django app uses Postgres
+
+install:
+  - pip install -r requirements.txt
+  - pip install black flake8 coverage coveralls
+
+script:
+  # 1. Check formatting (will fail if not formatted by black)
+  - black --check .
+  # 2. Check linting (requires a .flake8 file to match black's 88 chars)
+  - flake8 .
+  # 3. Run tests with coverage
+  - coverage run --source='.' manage.py test
+
+after_success:
+  - coveralls
+
+deploy:
+  provider: elasticbeanstalk
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+  region: "us-east-1" # Update to your EB region
+  app: "your-app-name"
+  env: "your-env-name"
+  bucket_name: "your-s3-bucket-name"
+  on:
+    branch: main
