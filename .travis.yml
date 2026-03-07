@@ -27,9 +27,8 @@ deploy:
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_KEY
   region: "us-west-2"
-  app: "swe1-app"
+  app: "djangotutorial"     
   env: "django-clean-v3"
-  # Space removed and double-check if this should be us-east-1 to match region above
   bucket_name: "elasticbeanstalk-us-west-2-563336977573"
   on:
     branch: main
