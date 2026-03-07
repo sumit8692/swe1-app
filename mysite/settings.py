@@ -28,18 +28,8 @@ DEBUG = True
 
 # mysite/settings.py
 
-ALLOWED_HOSTS = [
-    "django-clean-v3.eba-p8buupdi.us-west-2.elasticbeanstalk.com",
-    "localhost",
-    "127.0.0.1",
-]
+ALLOWED_HOSTS = ['*']
 
-# Automatically add the EC2 internal IP to ALLOWED_HOSTS
-try:
-    host_ip = socket.gethostbyname(socket.gethostname())
-    ALLOWED_HOSTS.append(host_ip)
-except Exception:
-    pass
 
 
 # Application definition
