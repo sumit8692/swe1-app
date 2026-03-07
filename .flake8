@@ -1,0 +1,18 @@
+[flake8]
+# 1. Match Black's default line length (instructor's requirement)
+max-line-length = 88
+
+# 2. Ignore specific conflicts between Black and Flake8
+# E203: whitespace before ':' (Black does this, Flake8 hates it)
+# W503: line break before binary operator (Black's style)
+extend-ignore = E203, W503
+
+# 3. Tell Flake8 NOT to scan these folders
+# You don't want to lint your virtual environment or auto-generated migrations
+exclude = 
+    .git,
+    __pycache__,
+    myenv,
+    venv,
+    migrations,
+    manage.py
