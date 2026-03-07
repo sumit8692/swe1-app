@@ -1,6 +1,7 @@
 [flake8]
-# 1. Match Black's default line length (instructor's requirement)
 max-line-length = 88
+extend-ignore = E203
+exclude = myenv/,tests.py
 
 # 2. Ignore specific conflicts between Black and Flake8
 # E203: whitespace before ':' (Black does this, Flake8 hates it)

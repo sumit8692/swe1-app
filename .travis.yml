@@ -3,7 +3,6 @@ language: python
 python:
   - "3.12"
 
-# Speed up subsequent builds
 cache: pip
 
 install:
@@ -12,17 +11,15 @@ install:
   - pip install black flake8 coverage coveralls
 
 script:
-  # 1. Formatting check (Strictly 88 chars)
-  - black --check .
+  # Added --exclude to ignore the virtual environment
+  - black --check . --exclude 'myenv/'
   
-  # 2. Linting check (Will ignore errors if you've set up .flake8)
-  - flake8 .
+  # Added --exclude for flake8 as well
+  - flake8 . --exclude=myenv/
   
-  # 3. Running tests for 'mysite' and 'polls'
   - coverage run --source='.' manage.py test
 
 after_success:
-  # Sends results to coveralls.io
   - coveralls
 
 deploy:
@@ -31,7 +28,8 @@ deploy:
   secret_access_key: $AWS_SECRET_KEY
   region: "us-east-1"
   app: "swe1-app"
-  env: "django-clean-v3" # Ensure this matches your AWS console exactly
-  bucket_name: "elasticbeanstalk-us-west-2-563336977573 " # Find this in your AWS S3 console
+  env: "django-clean-v3"
+  # Space removed and double-check if this should be us-east-1 to match region above
+  bucket_name: "elasticbeanstalk-us-west-2-563336977573"
   on:
     branch: main
