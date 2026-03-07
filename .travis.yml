@@ -1,33 +1,37 @@
 dist: focal
 language: python
 python:
-  - "3.10" # Or your specific version
+  - "3.12"
 
-services:
-  - postgresql # Only include if your Django app uses Postgres
+# Speed up subsequent builds
+cache: pip
 
 install:
+  - pip install --upgrade pip
   - pip install -r requirements.txt
   - pip install black flake8 coverage coveralls
 
 script:
-  # 1. Check formatting (will fail if not formatted by black)
+  # 1. Formatting check (Strictly 88 chars)
   - black --check .
-  # 2. Check linting (requires a .flake8 file to match black's 88 chars)
+  
+  # 2. Linting check (Will ignore errors if you've set up .flake8)
   - flake8 .
-  # 3. Run tests with coverage
+  
+  # 3. Running tests for 'mysite' and 'polls'
   - coverage run --source='.' manage.py test
 
 after_success:
+  # Sends results to coveralls.io
   - coveralls
 
 deploy:
   provider: elasticbeanstalk
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_KEY
-  region: "us-east-1" # Update to your EB region
-  app: "your-app-name"
-  env: "your-env-name"
-  bucket_name: "your-s3-bucket-name"
+  region: "us-east-1"
+  app: "swe1-app"
+  env: "Swe1-app-env" # Ensure this matches your AWS console exactly
+  bucket_name: "your-s3-bucket-name" # Find this in your AWS S3 console
   on:
     branch: main
