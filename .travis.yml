@@ -26,7 +26,7 @@ deploy:
   provider: elasticbeanstalk
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_KEY
-  region: "us-east-1"
+  region: "us-west-2"
   app: "swe1-app"
   env: "django-clean-v3"
   # Space removed and double-check if this should be us-east-1 to match region above
