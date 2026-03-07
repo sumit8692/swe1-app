@@ -1,19 +1,15 @@
 [flake8]
 max-line-length = 88
-extend-ignore = E203
-exclude = myenv/,tests.py
 
-# 2. Ignore specific conflicts between Black and Flake8
-# E203: whitespace before ':' (Black does this, Flake8 hates it)
-# W503: line break before binary operator (Black's style)
+# Merged: E203 and W503 for Black compatibility
 extend-ignore = E203, W503
 
-# 3. Tell Flake8 NOT to scan these folders
-# You don't want to lint your virtual environment or auto-generated migrations
+# Merged: All excluded directories in one place
 exclude = 
     .git,
     __pycache__,
     myenv,
     venv,
     migrations,
-    manage.py
+    manage.py,
+    tests.py
