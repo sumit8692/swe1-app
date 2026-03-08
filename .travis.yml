@@ -5,7 +5,11 @@ python:
 
 cache: pip
 
-service: travis-pro
+env:
+  global:
+    - COVERALLS_SERVICE_NAME=travis-pro
+
+
 
 
 install:
